@@ -3,4 +3,4 @@
   tasks:
     - name: OS version of Red Hat Enterprise Linux
       debug:
-        msg: "OS version is: {{ ansible_distribution_version }}"
+        msg: "OS version for {{ ansible_hostname }} is: {{ ansible_distribution_version }}"
