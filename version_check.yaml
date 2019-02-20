@@ -1,0 +1,6 @@
+- name: Find the OS version
+  hosts: all
+  tasks:
+    - name: OS version of Red Hat Enterprise Linux
+      debug:
+        msg: "OS version is: {{ ansible_distribution_version }}"
