@@ -1,0 +1,23 @@
+#########Replace the correct values in the to and from variables#################### 
+
+- name: Send an e-mail to the OS team with the latest patches info
+  hosts: all
+  gather_facts: False
+  become: true
+  become_method: sudo
+  become_user: root
+  tasks:
+    - name: Patches applied
+      become: yes
+      shell: yum history info >> /tmp/patches_list.txt
+      register: patches_list
+    - name: e-mail to server team
+      mail:
+        host: localhost
+        port: 25
+        from: user@test.testdomain.com
+        to: user@example.com
+        subject: OS patching
+        body: "The server {{ ansible_host }} patching history is attached"
+        attach:
+        - /tmp/patches_list.txt
