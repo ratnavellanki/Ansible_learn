@@ -1,0 +1,12 @@
+- name: Send an e-mail
+  hosts: all
+  gather_facts: False
+  tasks:
+    - name: e-mail to server team
+      mail:
+        host: localhost
+        port: 25
+        from: user@test.testdomain.com
+        to: user@example.com
+        subject: OS patching
+        body: "The server {{ ansible_host }} is online and this is a test mail"
