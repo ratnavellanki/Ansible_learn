@@ -1,6 +1,7 @@
 - name: Patch Red Hat Enterprise Linux system
   hosts: all
   gather_facts: False
+  ignore_errors: True
   tasks:
     - name: Update all RPM packages
       yum:
@@ -8,15 +9,14 @@
         state: latest
       become: yes
       register: patched
-      ignore_errors: True
+      
     - name: Reboot the system when software has been updated
       reboot:
       when: patched is changed
-      ignore_errors: True
+      
     - name: Check so that server is online
       wait_for:
         port: 22
         search_regex: OpenSSH
-        ignore_errors: True
       vars:
         ansible_connection: local
