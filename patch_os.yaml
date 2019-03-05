@@ -1,5 +1,6 @@
 - name: Patch Red Hat Enterprise Linux system
   hosts: all
+  gather_facts: False
   tasks:
     - name: Update all RPM packages
       yum:
